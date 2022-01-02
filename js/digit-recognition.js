@@ -175,7 +175,7 @@ $("#clear-button").click(async function () {
 	clickX = new Array();
 	clickY = new Array();
 	clickD = new Array();
-	$(".prediction-text").empty();
+	$(".prediction-text").html("draw");
 	$("#result_box").addClass('d-none');
 });
 
@@ -243,5 +243,5 @@ function displayLabel(data) {
             max = data[i];
         }
     }
-	$(".prediction-text").html("Predicting you draw <b>"+maxIndex+"</b> with <b>"+Math.trunc( max*100 )+"%</b> confidence")
+	$(".prediction-text").html("predicting you draw <b>"+maxIndex+"</b> with <b>"+Math.trunc( max*100 )+"%</b> confidence")
 }
