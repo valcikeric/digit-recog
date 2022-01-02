@@ -187,10 +187,10 @@ async function loadModel() {
 
   // clear the model variable
   model = undefined;
-  
+
   // load the model using a HTTPS request (where you have stored your model files)
   model = await tf.loadLayersModel("models/model.json");
-  
+
   console.log("model loaded..");
 }
 
@@ -212,7 +212,7 @@ function preprocessCanvas(image) {
 }
 
 //--------------------------------------------
-// predict function 
+// predict function
 //--------------------------------------------
 $("#predict-button").click(async function () {
     // get image data from canvas
@@ -293,4 +293,3 @@ function displayLabel(data) {
     }
 	$(".prediction-text").html("Predicting you draw <b>"+maxIndex+"</b> with <b>"+Math.trunc( max*100 )+"%</b> confidence")
 }
-
