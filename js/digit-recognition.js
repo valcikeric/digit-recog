@@ -3,21 +3,18 @@
 //-------------------
 let model;
 
-var canvasWidth           	= 150;
-var canvasHeight 			= 150;
+var canvasWidth           	= 200;
+var canvasHeight 			= 200;
 var canvasStrokeStyle		= "white";
 var canvasLineJoin			= "round";
 var canvasLineWidth       	= 10;
-var canvasBackgroundColor 	= "black";
+var canvasBackgroundColor 	= "gray";
 var canvasId              	= "canvas";
 
 var clickX = new Array();
 var clickY = new Array();
 var clickD = new Array();
 var drawing;
-
-document.getElementById('chart_box').innerHTML = "";
-document.getElementById('chart_box').style.display = "none";
 
 //---------------
 // Create canvas
@@ -106,6 +103,7 @@ canvas.addEventListener("touchmove", function (e) {
 //-------------------
 $("#canvas").mouseup(function(e) {
 	drawing = false;
+	predict();
 });
 
 //---------------------
@@ -116,6 +114,7 @@ canvas.addEventListener("touchend", function (e) {
     	e.preventDefault();
   	}
 	drawing = false;
+	predict();
 }, false);
 
 //----------------------
@@ -133,6 +132,7 @@ canvas.addEventListener("touchleave", function (e) {
     	e.preventDefault();
   	}
 	drawing = false;
+	predict();
 }, false);
 
 //--------------------
@@ -214,7 +214,7 @@ function preprocessCanvas(image) {
 //--------------------------------------------
 // predict function
 //--------------------------------------------
-$("#predict-button").click(async function () {
+async function predict() {
     // get image data from canvas
 	var imageData = canvas.toDataURL();
 
@@ -227,58 +227,10 @@ $("#predict-button").click(async function () {
 	// get the model's prediction results
 	let results = Array.from(predictions);
 
-	// display the predictions in chart
-	$("#result_box").removeClass('d-none');
-	displayChart(results);
+	// display label
 	displayLabel(results);
 
 	console.log(results);
-});
-
-//------------------------------
-// Chart to display predictions
-//------------------------------
-var chart = "";
-var firstTime = 0;
-function loadChart(label, data, modelSelected) {
-	var ctx = document.getElementById('chart_box').getContext('2d');
-	chart = new Chart(ctx, {
-	    // The type of chart we want to create
-	    type: 'bar',
-
-	    // The data for our dataset
-	    data: {
-	        labels: label,
-	        datasets: [{
-	            label: modelSelected + " prediction",
-	            backgroundColor: '#f50057',
-	            borderColor: 'rgb(255, 99, 132)',
-	            data: data,
-	        }]
-	    },
-
-	    // Configuration options go here
-	    options: {}
-	});
-}
-
-//----------------------------
-// display chart with updated
-// drawing from canvas
-//----------------------------
-function displayChart(data) {
-	var select_model  = document.getElementById("select_model");
-  	var select_option = "CNN";
-
-	label = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
-	if (firstTime == 0) {
-		loadChart(label, data, select_option);
-		firstTime = 1;
-	} else {
-		chart.destroy();
-		loadChart(label, data, select_option);
-	}
-	document.getElementById('chart_box').style.display = "block";
 }
 
 function displayLabel(data) {

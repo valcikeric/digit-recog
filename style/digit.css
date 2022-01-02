@@ -1,5 +1,5 @@
 .digit-demo-container {
-  background-color: rgb(158, 220, 228);
+  background-color: rgb(255, 255, 255);
   border-radius: 5px;
   margin: auto;
  }
@@ -17,17 +17,16 @@
 }
 .flex-two div {
   flex: 1;
-  padding: 5px;
+  padding: 10px;
   text-align: center;
 }
 @media screen and (max-width: 640px) {
     .flex-two div {
-        padding: 5px;
+        padding: 10px;
     }
 }
 
-.canvas-box-wrapper {
-  display: block !important; }
+
 
 
 #chart_box {
